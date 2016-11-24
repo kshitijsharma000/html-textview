@@ -88,6 +88,12 @@ public class HtmlTagHandler implements Html.TagHandler {
 
     private static class Center {
     }
+	
+	private static class Right {
+    }
+
+    private static class Left {
+    }
 
     private static class Strike {
     }
@@ -133,6 +139,10 @@ public class HtmlTagHandler implements Html.TagHandler {
                 start(output, new Code());
             } else if (tag.equalsIgnoreCase("center")) {
                 start(output, new Center());
+            } else if (tag.equalsIgnoreCase("right")) { //kshitij added for right and left align.. 24-11-2016
+                start(output, new Right());
+            } else if (tag.equalsIgnoreCase("left")) { 
+                start(output, new Left());
             } else if (tag.equalsIgnoreCase("s") || tag.equalsIgnoreCase("strike")) {
                 start(output, new Strike());
             } else if (tag.equalsIgnoreCase("table")) {
@@ -197,6 +207,10 @@ public class HtmlTagHandler implements Html.TagHandler {
                 end(output, Code.class, false, new TypefaceSpan("monospace"));
             } else if (tag.equalsIgnoreCase("center")) {
                 end(output, Center.class, true, new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER));
+            } else if (tag.equalsIgnoreCase("right")) {//kshitij added for right and left align.. 24-11-2016
+                end(output, Right.class, true, new AlignmentSpan.Standard(Layout.Alignment.ALIGN_OPPOSITE));
+            } else if (tag.equalsIgnoreCase("left")) {
+                end(output, Left.class, true, new AlignmentSpan.Standard(Layout.Alignment.ALIGN_NORMAL));
             } else if (tag.equalsIgnoreCase("s") || tag.equalsIgnoreCase("strike")) {
                 end(output, Strike.class, false, new StrikethroughSpan());
             } else if (tag.equalsIgnoreCase("table")) {
